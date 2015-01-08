@@ -10,6 +10,7 @@ from zope.interface import implements
 
 import os
 import time
+import random
 import ConfigParser
 
 from kippo.core import ttylog, utils
@@ -96,11 +97,30 @@ class HoneyPotSSHFactory(factory.SSHFactory):
 
         # FIXME: try to mimic something real 100%
         t = HoneyPotTransport()
+        
+        versionStrings = [
+            'SSH-2.0-OpenSSH_5.1p1 Debian-5',
+            'SSH-1.99-OpenSSH_4.3',
+            'SSH-1.99-OpenSSH_4.7',
+            'SSH-1.99-Sun_SSH_1.1',
+            'SSH-2.0-OpenSSH_4.2p1 Debian-7ubuntu3.1',
+            'SSH-2.0-OpenSSH_4.3',
+            'SSH-2.0-OpenSSH_4.6',
+            'SSH-2.0-OpenSSH_5.1p1 Debian-5',
+            'SSH-2.0-OpenSSH_5.1p1 FreeBSD-20080901',
+            'SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu5',
+            'SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu6',
+            'SSH-2.0-OpenSSH_5.3p1 Debian-3ubuntu7',
+            'SSH-2.0-OpenSSH_5.5p1 Debian-6',
+            'SSH-2.0-OpenSSH_5.5p1 Debian-6+squeeze1',
+            'SSH-2.0-OpenSSH_5.5p1 Debian-6+squeeze2',
+            'SSH-2.0-OpenSSH_5.8p2_hpn13v11 FreeBSD-20110503',
+            'SSH-2.0-OpenSSH_5.9p1 Debian-5ubuntu1',
+            'SSH-2.0-OpenSSH_5.9',
+            'SSH-2.0-OpenSSH_5.3',
+        ]
 
-        if cfg.has_option('honeypot', 'ssh_version_string'):
-            t.ourVersionString = cfg.get('honeypot','ssh_version_string')
-        else:
-            t.ourVersionString = "SSH-2.0-OpenSSH_5.1p1 Debian-5"
+        t.ourVersionString = random.choice(versionStrings) #"SSH-2.0-OpenSSH_5.1p1 Debian-5"
 
         t.supportedPublicKeys = self.privateKeys.keys()
 

@@ -1,1 +1,13 @@
 root:0:123456
+root:0:god
+root:0:admin
+root:0:1234
+root:0:password
+root:0:testing
+root:0:einstein
+root:0:tesla
+root:0:family
+root:0:home
+admin:1:admin
+admin:1:root
+guest:100:guest
